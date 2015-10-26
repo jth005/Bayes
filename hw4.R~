@@ -1,0 +1,44 @@
+##8
+##a
+
+data <- c(1.2, 2.4, 1.3, 1.3, 0.0, 1.0,1.8, 0.8, 4.6, 1.4)
+length(data)
+k <- 10
+
+s2 <- (1/k)*sum(((data) - mean(data))^2)
+
+tausq.hat <- s2 - 1
+
+b.hat <- 1 / (1 + tausq.hat)
+
+js.theta <- (1 - (k-2) / (sum( data^2)) )  * data;js.theta
+
+
+##b (done)
+
+js.prime.theta <- mean(data) + (1 - (k-3)/(sum( (data - mean(data))^2)))*(data - mean(data));js.prime.theta
+
+##c
+
+center <- b.hat*mean(data) + (1 - b.hat)*data[9]
+
+lower <- -1.96*sqrt(1 - b.hat)
+upper <- 1.96*sqrt(1 - b.hat)
+
+center + lower
+center + upper
+
+##d
+
+b.hat.m <- (k-3)/(k-1) * b.hat
+
+center.m <- b.hat.m * mean(data) + (1- b.hat.m)*data[9]
+
+v.hat.m <- (1 - ((k-1)/k)*b.hat.m) + (2/(k-3))*(b.hat.m^2)*(data[9] - mean(data))^2
+
+lower <- -1.96*sqrt(v.hat.m)
+
+upper <- 1.96*sqrt(v.hat.m)
+
+center+lower
+center+upper

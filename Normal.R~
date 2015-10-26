@@ -1,0 +1,29 @@
+acs <- read.csv(url("http://stat511.cwick.co.nz/homeworks/acs_or.csv"))
+
+mu<-5
+sigmasq <- 2
+tausq <- 4
+
+y <- 4
+
+theta <- seq(-5, 15, 0.1)
+
+like <- 1/(sqrt(2*pi*sigmasq))*exp(-0.5* (1/sigmasq) * (y - theta)^2)
+
+prior <-  1/(sqrt(2*pi*tausq))*exp(-0.5* (1/tausq) * (theta - mu)^2)
+
+B <- sigmasq / (sigmasq  +tausq)
+
+post <-  1/(sqrt(2*pi*(1-B)*sigmasq))*exp(-0.5* (1/(1 - B)*sigmasq) * (theta - (B*mu + (1-B)*y))^2)
+
+plot(theta, like, type='l', xlab= 'theta', ylab='density curves', main='sketches for likelihood, prior, posterior', pch=0)
+
+            lines(theta, prior, type='l', pch=1)
+
+lines(theta, post, type='l', pch=2, lwd = 4)
+
+legend(-5, 0.1, cex=1, c('likelihood', 'prior', 'posterior'), pch= c(0,1,2))
+
+                                        #or just use dnorm()
+
+
