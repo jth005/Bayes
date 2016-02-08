@@ -1,0 +1,95 @@
+X <- c(1,2,4,4,5,8,10,10,12,15,20,22,25,25,30,35,40,50,50)
+Y <- c(925,870,809,720,694,630,626,562,546,523,480,486,462,441,426,368,350,348,322)
+
+X <- matrix( c(rep( 1, 19), X , X^2), nrow = 19)
+
+
+Y <- as.matrix(Y)
+length(X)
+length(Y)
+
+
+library(pscl)
+
+n <- 19
+p <- 3
+
+B.hat <- solve(t(X) %*% X) %*% t(X) %*% Y
+
+RSS <- sum ( (Y - X %*% B.hat)^2)
+
+sigma.sq <- rigamma(1, (n-p)/2 , RSS/2)
+
+mu <- mvrnorm(1,  B.hat, sigma.sq * solve(t(X)%*%X))
+
+N <- 10000
+
+min.tax <- rep(0,N)
+
+
+for (i in 1:N){
+    sigma.sq <- rigamma(1, (n-p)/2 , RSS/2)
+    beta <- mvrnorm(1,  B.hat, sigma.sq * solve(t(X)%*%X))
+    min.tax[i] <- -beta[2] / (2 * beta[3])
+
+}
+
+
+
+min.tax.hat <- mean (min.tax); min.tax.hat
+
+
+quantile(min.tax, probs=c(0.025, 0.975))
+
+plot(density(min.tax))
+
+
+## 9
+
+coal <-read.table("/home/john/coal_data.txt")
+
+y <- coal$V2
+
+sum(y[1:40])
+sum(y[41:112])
+n <- 112
+m <- 1000
+theta <- lambda <-numeric(m)
+L <- numeric(n)
+theta[1] <- 1
+lambda[1] <- 1
+b1 <- 1
+b2 <- 1
+k <- 40
+
+
+for (i in 2:m){
+    r <- 0.5 + sum(y[1:40])
+    theta[i] <- rgamma (1, shape = r, rate = 40 +b1)
+
+    r <- 0.5 + sum(y[41:n])
+    lambda[i] <- rgamma(1 , shape = r, rate = n - 40 + b2)
+
+    b1 <- rgamma (1, shape = 0.5, rate = theta[i] +1)
+    b2 <- rgamma (1, shape = 0.5, rate = lambda[i] +1)
+
+   
+    
+}
+
+mean(theta)
+mean(lambda)
+
+mean(theta) / mean(lambda)
+
+
+install.packages(c("coda" , "lattice"))
+install.packages("R2OpenBUGS")
+
+library(coda);library(lattice)
+
+library(R2OpenBUGS)
+
+install.packages("BRugs")
+
+library(BRugs)

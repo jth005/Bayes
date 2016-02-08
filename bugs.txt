@@ -1,0 +1,34 @@
+model{
+   S[1] <- 0
+   for (i in 1:n){
+      S[i+1] <- S[i]+Y[i]
+      zeros[i] <- 0
+      l[i] <- exp(i*(mu-lambda)+S[i+1]*(log(lambda)))
+   }
+   for (i in 1:n){
+      p[i] <- l[i]/sum(l[])
+   }
+   Q <- 1 + S[k]
+   R <- 1 + S[n] - S[k]
+   q <- delta + k
+   r <- delta + n - k
+   lambda ~ dgamma(Q,q)
+   mu ~ dgamma(R,r)
+   a <- lambda + 1
+   b <- mu + 1
+   gamma ~ dgamma(1,a)
+   delta ~ dgamma(1,b)
+   k ~ dcat(p[])
+   date <- 1851.5+k
+}
+
+data;
+list(n=112,Y=c(
+    4,5,4,1,0,4,3,4,0,6,3,3,4,0,2,6,3,3,5,4,5,3,1,4,4,
+    1,5,5,3,4,2,5,2,2,3,4,2,1,3,2,1,1,1,1,1,3,0,0,1,0,
+    1,1,0,0,3,1,0,3,2,2,0,1,1,1,0,1,0,1,0,0,0,2,1,0,0,
+    0,1,1,0,2,2,3,1,1,2,1,1,1,1,2,4,2,0,0,0,1,4,0,0,0,
+    1,0,0,0,0,0,1,0,0,1,0,0))
+
+inits;
+list(k=56,gamma=1,delta=1,lambda=1,mu=1)

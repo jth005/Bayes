@@ -1,0 +1,38 @@
+%9/98
+\documentclass[12pt]{article}
+\pagestyle{empty}
+
+%\input amssym.def
+%\input amssym
+%\input psfig.tex
+%\input mssymb
+\usepackage{amsmath} 
+\usepackage{graphicx}
+%%\usepackage{showlabels}
+%\renewcommand\marginpar[1]{}
+%\newcommand{\comment}[1]{}
+\textwidth 6in
+\oddsidemargin 0.25in
+\topmargin -0.75in
+\textheight 8.5in
+
+
+
+
+\newcommand{\CourseName}{\textsf{MATH 6480 - John Haman }}
+\begin{document}
+\medskip
+\begin{flushleft}
+  \CourseName \hfill \textsf{EM Algorithm Report}\\
+\medskip
+
+
+The EM (Expectionation-Maximization) Algorithm is a general optimization method that is often applied to find the maximum likelihood estimates when missing values are present in a data set. The algorithm arose from the seminal paper, \textit{Maximum Likelihood for incomplete data via the EM algorithm} by Dempster, Laird, and Rubin, and has since been widely applied and extended to other types of statistical problems. In particular, the algorithm is known to be applicable in a range of Bayesian estimation problems. \\
+
+\medskip
+
+
+
+
+\end{flushleft}
+\end{document}

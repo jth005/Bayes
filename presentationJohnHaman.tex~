@@ -1,0 +1,552 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+% Beamer Presentation
+% LaTeX Template
+% Version 1.0 (10/11/12)
+% 
+% This template has been downloaded from:
+% http://www.LaTeXTemplates.com
+% 
+% License:
+% CC BY-NC-SA 3.0 (http://creativecommons.org/licenses/by-nc-sa/3.0/)
+% 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+
+% ----------------------------------------------------------------------------------------
+%	PACKAGES AND THEMES
+% ----------------------------------------------------------------------------------------
+
+\documentclass{beamer}
+
+\mode<presentation> {
+
+  % The Beamer class comes with a number of default slide themes
+  % which change the colors and layouts of slides. Below this is a list
+  % of all the themes, uncomment each in turn to see what they look like.
+
+  % \usetheme{default}
+  % \usetheme{AnnArbor}
+  % \usetheme{Antibes}
+  % \usetheme{Bergen}
+  % \usetheme{Berkeley}
+  % \usetheme{Berlin}
+  % \usetheme{Boadilla}
+  % \usetheme{CambridgeUS}
+  % \usetheme{Copenhagen}
+  % \usetheme{Darmstadt}
+  % \usetheme{Dresden}
+  % \usetheme{Frankfurt}
+  % \usetheme{Goettingen}
+  % \usetheme{Hannover}
+  % \usetheme{Ilmenau}
+  % \usetheme{JuanLesPins}
+  % \usetheme{Luebeck}
+  \usetheme{Madrid}
+  % \usetheme{Malmoe}
+  % \usetheme{Marburg}
+  % \usetheme{Montpellier}
+  % \usetheme{PaloAlto}
+  % \usetheme{Pittsburgh}
+  % \usetheme{Rochester}
+  % \usetheme{Singapore}
+  % \usetheme{Szeged}
+  % \usetheme{Warsaw}
+
+  % As well as themes, the Beamer class has a number of color themes
+  % for any slide theme. Uncomment each of these in turn to see how it
+  % changes the colors of your current slide theme.
+
+  % \usecolortheme{albatross}
+  \usecolortheme{beaver}
+  % \usecolortheme{beetle}
+  % \usecolortheme{crane}
+  % \usecolortheme{dolphin}
+  % \usecolortheme{dove}
+  % \usecolortheme{fly}
+  % \usecolortheme{lily}
+  % \usecolortheme{orchid}
+  % \usecolortheme{rose}
+  % \usecolortheme{seagull}
+  % \usecolortheme{seahorse} 
+  % \usecolortheme{whale}
+  % \usecolortheme{wolverine}
+
+  % \setbeamertemplate{footline} % To remove the footer line in all slides uncomment this line
+  % \setbeamertemplate{footline}[page number] % To replace the footer line in all slides with a simple slide count uncomment this line
+
+XS  % \setbeamertemplate{navigation symbols}{} % To remove the navigation symbols from the bottom of all slides uncomment this line
+}
+\usepackage{amsmath}
+\usepackage{graphicx} % Allows including images
+\usepackage{booktabs} % Allows the use of \toprule, \midrule and \bottomrule in tables
+\usepackage{tikz}
+\newcommand\mysim{\mathrel{\overset{\makebox[0pt]{\mbox{\normalfont\tiny\sffamily iid}}}{\sim}}}
+\def\checkmark{\tikz\fill[scale=0.4](0,.35) -- (.25,0) -- (1,.7) -- (.25,.15) -- cycle;} 
+
+% ----------------------------------------------------------------------------------------
+%	TITLE PAGE
+% ----------------------------------------------------------------------------------------
+
+\title[Preliminary Report Presentation]{Introduction to the Asymmetric Laplace Distribution} % The short title appears at the bottom of every slide, the full title is only on the title page
+
+\author{John Haman} % Your name
+\institute[BGSU] % Your institution as it will appear on the bottom of every slide, may be shorthand to save space
+{
+  Bowling Green State University \\ % Your institution for the title page
+  \medskip
+  \textit{jthaman@bgsu.edu} % Your email address
+}
+\date{\today} % Date, can be changed to a custom date
+
+\begin{document}
+
+\begin{frame}
+  \titlepage % Print the title page as the first slide
+\end{frame}
+
+\begin{frame}
+  \frametitle{Overview} % Table of contents slide, comment this block out to remove it
+  \tableofcontents % Throughout your presentation, if you choose to use \section{} and \subsection{} commands, these will automatically be printed on this slide as an overview of your presentation
+\end{frame}
+
+% ----------------------------------------------------------------------------------------
+%	PRESENTATION SLIDES
+% ----------------------------------------------------------------------------------------
+
+% ------------------------------------------------
+\section{Recap of the Laplace Distribution } 
+% ------------------------------------------------
+
+
+
+\begin{frame}
+  \frametitle{Classical Laplace Distribution}
+  \begin{itemize}
+
+  \item Density is given by $f(x;\theta,s) = \frac{1}{2s}e^{\frac{-1}{s} |x - \theta|}$.
+    \pause
+  \item Characteristic function is given by $ \phi_X(t)=\frac{e^{it\theta}}{1 + s^2 t^2 }$. 
+
+  \end{itemize}
+
+  \pause\vskip 0.2in
+
+  Has many interesting applications as well:
+
+  \begin{itemize}
+  \item Currency exchange rates (Later)
+  \item Interest rate data
+  \item Quality Control
+  \end{itemize}
+
+  \pause\vskip 0.2in
+
+  Laplace is the first choice whenever ``something'' with heavier than Gaussian tails is observed in the data, but we wish to retain finite moments.
+
+
+\end{frame}
+
+% ----------------------------------------------------------------
+
+\begin{frame}
+  \frametitle{Application: Wind Shears}
+
+  Wind shears (sharp bits of turbulence) are encounted by aircrafts when taking off and landing, understanding their distribution aids in assessing the
+  \begin{itemize}
+  \item safety of an aircraft
+  \item readiness of a pilot when they encounter a shear.
+  \end{itemize}
+
+  \pause \vskip 0.2in
+
+  Barnforff-Nielson (1979) proposes hyperbolic distributions to model wind shears, but the procedure is very complicated.
+
+  \pause\vskip 0.2in
+
+  Kanji (1985) proposed a mixture of Laplace and Gausssian densities to model wind shears:
+
+  $$f(x; \mu, \sigma, p) = p \frac{1}{\sqrt{2}\sigma} e^{-\frac{\sqrt{2}}{\sigma} |x - \mu| } + (1-p) \frac{1}{\sqrt{2\pi} \sigma} e^{-\frac{1}{2\sigma^2} (x-\mu)^2}$$
+
+  The Laplace and Gaussian densities have the same mean and variance.
+
+\end{frame}
+
+% ---------------------------------------------------------
+
+\begin{frame}
+  \frametitle{Application: Wind Shears}
+
+  Histograms suggest that at the beginning of a landing approach, the Laplace model fits the data well.
+  \vskip 0.2in
+  But at the end of the approach, a Gaussian model fits the data well. 
+
+  \pause \vskip 0.2 in 
+
+  A time interval is partitioned into subintervals and the mixing constant $p$ is decreased over the subintervals. 
+\end{frame}
+
+% ---------------------------------------------------------
+
+\begin{frame}
+  \frametitle{ Interesting Properties}
+
+  Let $X$ be a Laplace r.v. and $W_i$ i.i.d $Exp(1)$ random variables.
+
+  \begin{itemize}
+
+  \item  $X \stackrel{d}{=} W_1 - W_2$.
+    \pause\vskip 0.2in
+  \item $X \stackrel{d}{=} \sqrt{2W}Z$, when $Z$ is standard Normal.
+    \pause\vskip 0.2in
+  \item $X$ has the same distribution as a scaled sum of a geometric number of i.i.d. copies of $X$.
+    \pause\vskip 0.2in
+  \item  $X$ has a maximum entropy property. (Maximizes entropy among continuous distributions with fixed first absolute moment)
+    \pause\vskip 0.2in
+  \end{itemize}
+
+  These are noteworthy because they extend naturally when skewness is introduced
+\end{frame}
+% ------------------------------------------------------------------------------------
+
+\section{Asymmetric Case}
+\label{sec:est}
+
+
+\begin{frame}
+  \frametitle{Asymmetric Case}
+
+  \begin{definition}
+    A random variable $Y$ is said to have an asymmetric Laplace distribution if there exist parameters $\theta \in \mathbb{R}$, $\mu \in \mathbb{R}$, and $\sigma \in \mathbb{R^+}$ such that the ch.f of $Y$ has the form 
+
+    $$ \phi_Y(t) = \frac{e^{i\theta t} }{ 1 + \frac{1}{2} \sigma^2 t^2 - i \mu t}$$ 
+
+  \end{definition}
+  \pause\vskip 0.2in
+
+  The parameter $\mu$ introduces a level of skewness (It controls how much probability is assigned to each side of $\theta$). 
+\end{frame}
+
+% ----------------------------------------------------------------------------------------
+
+
+\begin{frame}
+  \frametitle{Parameterization}
+
+  It usually easier to work with an alternative parameterization, denoted $\mathcal{AL*}(\theta, \kappa, \sigma)$, where $\kappa = \frac{\sqrt{2\sigma^2 +\mu^2} - \mu}{ \sqrt{2}\sigma}$
+  \pause
+
+  \begin{definition}\label{aldensity}
+    Let $f$ denote the density function of an $\mathcal{AL*}(\theta, \kappa, \sigma)$ random variable. Then 
+
+    \[
+      f(x;\theta,\kappa, \sigma) =\frac{\sqrt{2}}{\sigma} \frac{\kappa}{1 + \kappa^2}
+      \begin{cases} 
+        \hfill \exp\{ - \frac{\sqrt{2}\kappa}{\sigma} |x - \theta| \}   \hfill & \text{ if $x \geq \theta$} \\
+        \hfill \exp\{ - \frac{\sqrt{2}}{\sigma\kappa} |x - \theta|\}  \hfill & \text{ if $x \leq \theta$} \\
+      \end{cases}
+    \]
+  \end{definition}
+
+  \vskip 0.2in
+
+  In this model, $\mu=0$ corresponds to $\kappa=1$. 
+
+\end{frame}
+% ----------------------------------------------------------------------------------
+
+\begin{frame}
+  \frametitle{Basic Sketch of the Density (Kotz et al. p. 139)}
+  \centering
+  For each of the densities below, $\theta = 0$, $\sigma =\sqrt{2}$, and $\mu = 0, 0.8, 1.5, 2, 3, 4, 6, 8, 10$.
+
+  \begin{center}
+    \includegraphics[scale=0.3]{density.png}
+  \end{center}
+  \begin{center}
+    \begin{itemize}
+    \item If $\kappa <1$ then Mode $<$ Median $<$ Mean\\
+    \item If $\kappa >1$ then Mean $<$ Median $<$ Mode 
+    \end{itemize}
+  \end{center}
+\end{frame}
+% -------------------------------------------------------------------------------------
+\begin{frame}
+  \frametitle{Basics}
+
+  Let $Y \sim \mathcal{AL*} (0, \kappa, \sigma)$
+
+  \begin{center}
+    \begin{tabular}{|c|c|c|}
+      \hline
+      Parameter& Definition & Value \\
+      \hline
+      Absolute Moments & $\mathrm{E} |Y|^a$, $a > -1$ & $\left( \frac{\sigma}{\sqrt{2}\kappa}\right)^a \Gamma(a +1) \frac{1 + \kappa^{2(a+1)}}{1+\kappa^2}$\\
+      \hline
+      Moments & $\mathrm{E}Y^n$ & $n! \left( \frac{\sigma}{\sqrt{2}\kappa}\right)^n \frac{1 + (-1)^n \kappa^{2(n+1)}}{1 + \kappa^2}$\\
+      \hline
+      Mean & $\mathrm{E}Y$ & $\mu= \frac{\sigma}{\sqrt{2}} \left( \frac{1}{\kappa} -\kappa \right)$ \\
+      \hline
+      Variance & $\mathrm{E}(Y - \mathrm{E}Y)^2$ & $\mu^2 + \sigma^2 $\\
+      \hline
+    \end{tabular}
+  \end{center}
+
+
+\end{frame}
+% -----------------------------------------------------------------------------------
+
+\begin{frame}
+  \frametitle{Representations}
+  Let $Y \sim \mathcal{AL*}(\theta, \kappa, \sigma)$, then
+  \begin{itemize}
+    \vskip 0.2 in
+  \item $c + X \sim \mathcal{AL*}(\theta + c , \kappa, \sigma) $
+    \pause\vskip 0.2in
+  \item $ cX \sim \mathcal{AL*}(c\theta, \kappa_c, |c|\sigma)$, where $\kappa_c = \kappa^{sign(c)}$. 
+    \pause\vskip 0.2in
+  \item $ Y \stackrel{d}{=} \theta + \frac{\sigma}{\sqrt{2}}\left(\frac{1}{\kappa}W_1 - \kappa W_2\right)$, where $W_i$ i.i.d. $Exp(1)$
+    \pause\vskip 0.2in
+  \item  $ Y \stackrel{d}{=} \theta  + \mu W + \sigma \sqrt{W} Z$, where $Z$ is standard Normal
+
+
+  \end{itemize}
+\end{frame}
+
+% --------------------------------------------------------------------------------
+
+\begin{frame}
+  \frametitle{Characterizations}
+
+  \begin{itemize}
+  \item AL random variables are \textit{infinitely divisible} and \textit{self-decomposable}.
+
+    \pause\vskip 0.2in
+    
+  \item AL random variables are actually \textit{geometrically infinitely divisible}.
+    \pause\vskip 0.2in
+  \item The AL distribution has a maximum entropy property: Among continuous distributions with fixed first absolute moment and fixed first moment, an AL distribution produces the largest entropy.
+
+
+  \end{itemize}
+\end{frame}
+
+% -----------------------------------------------------------------------------
+
+\begin{frame}
+  \frametitle{Application: Exchange Rates}
+
+  Consider exchange rate as the sum of many small changes
+
+  $$\text{exchange rate change} = \sum_{i=1}^{\nu_P}\text{ (small changes)}$$
+
+  where $\nu_P$ is the random time when a there is a fundamental change in the exchange market.
+
+  \pause \vskip 0.2in
+
+  Kozubowski and Podgorski (2000) fitted AL models to two currency commodities:
+
+  \begin{itemize}
+  \item German Deutschmark vs. US Dollar
+  \item Japanese Yen vs. US Dollar
+  \end{itemize}
+
+  Data are daily exchange rates from 1980 to 1990. 
+
+\end{frame}
+% ---------------------------------------------------------------------------------
+\begin{frame}
+  \frametitle{Histograms of the Data}
+  \begin{center}
+    \includegraphics[scale=0.5]{data.png}
+  \end{center}
+
+  Not Gaussian, histogram looks concave up everywhere
+
+  \pause\vskip 0.2in
+
+  Data also appears to be slightly skewed to the right.
+\end{frame}
+
+% ------------------------------------------------------------------------------------
+
+\begin{frame}
+
+  \frametitle{Fit Statistics: QQ-plot}
+
+  \begin{center}
+    \includegraphics[scale=0.4]{qq.png}
+    \vskip 0.1in
+    Theoretical distributions determined via Maximum Likelihood estimation.
+  \end{center}
+
+
+\end{frame}
+% -----------------------------------------------------------------------------------
+\section{Estimation}
+\label{sec:est}
+
+\begin{frame}
+  \frametitle{Maximum Likelihood Methods}
+
+
+  The log-Likelihood is given by:
+
+  $$ \ell (\theta, \kappa, \sigma) = \frac{n}{2} \log(2) - n \log(\sigma) + n \log\left(\frac{\kappa}{1 + \kappa^2 }\right) - \frac{\sqrt{2}}{\sigma} D $$ 
+
+  where 
+
+  \begin{equation}
+    \label{D}
+    D = D( \theta, \kappa) = \kappa \sum_{j=1}^n (x_j - \theta)\textbf{1}_{\{x_j \geq \theta\}} + \frac{1}{\kappa} \sum_{j=1}^n (\theta - x_j)\textbf{1}_{\{x_j \leq \theta\}}. 
+  \end{equation}
+
+  \pause\vskip 0.2 in
+
+  Method of Moments estimators are also viable, but are more often biased and don't have ``nice'' asymptotic properties.
+\end{frame}
+
+
+\begin{frame}
+  \frametitle{Estimation: $\theta$}
+
+  Goal is to minimize $$ Q(\theta) = \kappa \sum_{j=1}^n (x_j - \theta)\textbf{1}_{\{x_j \geq \theta\}} + \frac{1}{\kappa} \sum_{j=1}^n (\theta - x_j)\textbf{1}_{\{x_j \leq \theta\}}$$
+
+  \pause
+
+  The minimum value occurs at an order-statistic:
+
+  $$ \hat{\theta} = X_{j:n} $$ where $$j = j(n) = \left\lfloor \frac{n\kappa^2}{1 + \kappa^2}\right\rfloor +1 $$ 
+
+\end{frame}
+
+% --------------------------------------------------------------------------------
+
+\begin{frame}
+  \frametitle{Estimation: $\sigma$}
+
+  In this case we want to maximize
+
+  $$ Q(\sigma) = C - n\log(\sigma) - \frac{\sqrt{2}}{\sigma}D,$$ $C$ and $D$ don't depend on $\sigma$
+
+  \pause\vskip 0.2 in
+
+
+  $$\hat{\sigma}_n = \frac{\sqrt{2}}{n}\left\{ \kappa \sum_{j=1}^n (x_j - \theta)\textbf{1}_{\{x_j \geq \theta\}}  + \frac{1}{\kappa} \sum_{i=1}^n (\theta - x_j)\textbf{1}_{\{x_j \leq \theta\}} \right\}  = \frac{\sqrt{2}}{n} D$$
+
+
+
+\end{frame}
+
+% --------------------------------------------------------------------------------
+
+\begin{frame}
+  \frametitle{Estimation: $\kappa$}
+
+In this case we need to maximize the function 
+  
+  $$ Q(y)=  Q ( y, \alpha, \beta) = \log(y) - \log ( 1 + y^2 ) - \alpha y - \frac{\beta}{y } $$ 
+
+  with respect to $y \in \mathbb{R}^+$, where 
+
+  $$ \alpha = \alpha ( \theta ) = \frac{\sqrt{2}}{\sigma} \frac{ 1}{n } \sum_{j = 1 }^n ( x_j - \theta)\textbf{1}_{\{x_j \geq \theta\}} , \,\,\,\, \beta = \beta (\theta) = \frac{\sqrt{2}}{\sigma } \frac{1}{n} \sum_{j=1}^n (\theta - x_j)\textbf{1}_{\{x_j \leq \theta\}} $$ .
+
+  \pause \vskip 0.1 in
+
+  $$ Q'( y , \alpha, \beta) = \frac{1}{y } - \frac{ 2y}{ 1 + y^2 } + \frac{\beta}{ y^2} - \alpha$$
+
+
+  The MLE for $\kappa$ is given by the solution set of the equation $$ Q'(y , \alpha, \beta) =0$$
+
+  
+\end{frame}
+
+% ----------------------------------------------------------------------------
+
+\begin{frame}
+  \frametitle{Estimation: $\kappa$}
+
+  \begin{lemma}[Kotz et al., p. 162]
+    For any fixed $\alpha, \beta > 0 $, $Q'$ is strictly decreasing on $(0 , \infty)$  with 
+
+    $$ \lim_{y \to 0^+} Q' ( y , \alpha, \beta) = \infty ,\,\,\,\,\, and \,\,\,\,\,\, \lim_{ y \to \infty } Q'( y , \alpha, \beta) = -\alpha < 0$$
+
+    so that there exists a unique solution $y_0 \in (0,\infty)$ to the equation $ Q' = 0 $. Moreover, we have that 
+
+    $$ \sqrt{\frac{\beta}{\alpha}} \leq y_0 \leq 1 \text {  if  } \beta \leq \alpha $$
+
+    $$ 1 \leq y_0 \leq \sqrt{\frac{\beta}{\alpha}} \text {  if  } \beta \geq \alpha $$
+  \end{lemma}
+  \pause\vskip 0.1 in
+
+  The solution $\hat{\kappa} = y_0$ does not admit a closed form and must be solved numerically.
+
+\end{frame}
+
+% -------------------------------------------------------------------------------
+
+\begin{frame}
+  \frametitle{Properties of these Estimators}
+
+  \begin{center}
+    \begin{tabular}{|c|c|c|c|}
+      \hline
+      & $ \hat{\theta} = X_{j:n}$& $\hat{\sigma} = \frac{\sqrt{2}}{n}D$& $\hat{\kappa} = y_0$\\
+      \hline
+      Unbiased? &  & \checkmark &  \\
+      \hline
+      Consistent? &  \checkmark & \checkmark (strong) & \checkmark \\
+      \hline
+      Asymptotically Normal? & \checkmark & \checkmark & \checkmark \\
+      \hline
+      Asymptotically Efficient? & \checkmark & \checkmark & \checkmark \\
+      \hline
+    \end{tabular}
+  \end{center}
+\end{frame}
+
+% -------------------------------------------------------------------------------
+
+\section{Further Developments}
+
+
+
+
+\begin{frame}
+  \frametitle{Research Prospects}
+
+  We have see that the MLE's for the parameters are rather ugly, and when more than one parameter is unknown, the situation is worsened. \\
+
+  \pause \vskip 0.2 in
+  Possible Solutions
+
+  \begin{itemize}
+  \item  The EM algorithm is not applicable, but perhaps a modification can be made.
+
+    \pause \vskip 0.2 in 
+    
+  \item A goodness-of-fit statistic is being worked out, and could be used to estimate parameters.
+
+    \pause \vskip 0.2 in 
+
+  \item Many ``odds and ends'' results can likely be worked out for the this distribution and it's multivariate counterpart:
+
+    \begin{itemize}
+    \item Estimation via Empirical Bayes?
+    \item Asymmetric Laplace motion?
+    \item Possible to leverage results from related distributions? (Hyperbolic, Bessel)
+    \end{itemize}
+
+
+
+  \end{itemize}
+\end{frame}
+
+%-------------------------------------------------------------------------------
+
+\begin{frame}
+  \begin{center}
+    \textsf{\huge{Thanks!}}\\
+References are provided in the report.
+  \end{center}
+\end{frame}
+
+\end{document} 
